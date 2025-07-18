@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Our Love Quotes & Memories</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to top right, #ffe4ec, #ffd6eb, #fbc2eb);
+      min-height: 100vh;
+      color: #fff;
+      padding: 60px 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 60px;
+      text-align: center;
+      margin-bottom: 50px;
+      color: #fff;
+      text-shadow: 0 0 18px rgba(255, 255, 255, 0.7);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .quote-box {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+      padding: 20px;
+      height: 170px;
+      color: white;
+      font-size: 18px;
+      font-weight: 400;
+      text-align: center;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 20px rgba(255, 105, 180, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .quote-box:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 25px rgba(255, 105, 180, 0.5);
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin: 60px auto 0;
+      padding: 14px 30px;
+      background: #ff6b81;
+      border-radius: 30px;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 6px 20px rgba(255, 71, 87, 0.5);
+      transition: background 0.3s ease, transform 0.2s ease;
+      text-align: center;
+    }
+
+    .back-btn:hover {
+      background: #e84118;
+      transform: scale(1.05);
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(6px);
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      text-align: center;
+      position: relative;
+    }
+
+    .modal img {
+      max-width: 80vw;
+      max-height: 80vh;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+      animation: fadeIn 0.4s ease;
+    }
+
+    .caption {
+      margin-top: 20px;
+      font-size: 20px;
+      color: #fff;
+      font-weight: 500;
+      text-shadow: 0 0 10px rgba(255,255,255,0.3);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Floating Hearts */
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      transform: rotate(45deg);
+      animation: float 6s linear infinite;
+      opacity: 0.7;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      border-radius: 50%;
+    }
+
+    .heart::before { top: -10px; left: 0; }
+    .heart::after  { left: 10px; top: 0; }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(45deg); opacity: 1; }
+      100% { transform: translateY(-100vh) rotate(45deg); opacity: 0; }
+    }
+
+    audio {
+      display: none;
+    }
+
+    @media (max-width: 800px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 500px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- 🎶 Background Music (should be controlled from index page) -->
+<audio id="bgMusic" autoplay loop>
+  <source src="happy-birthday.mp3" type="audio/mp3">
+</audio>
+
+<h1>💕 Our Love in Quotes & Memories 💕</h1>
+
+<div class="grid">
+  <div class="quote-box" onclick="openModal('images/q1.jpg', 'Everything started here-our first comfort talk.')">"Everything started here-our first comfort talk."</div>
+  <div class="quote-box" onclick="openModal('images/q2.jpg', 'That first closeness & handhold.')">"That first closeness & handhold."</div>
+  <div class="quote-box" onclick="openModal('images/q3.jpg', 'Uff this bestest night-our first kiss & first night date.')">"Uff this bestest night-our first kiss & first night date."</div>
+  <div class="quote-box" onclick="openModal('images/q4.jpg', 'Speciallest-that first bed share and the memories.')">"Speciallest-that first bed share and the memories."</div>
+  <div class="quote-box" onclick="openModal('images/q5.jpg', 'Here starts a very special week our first valentine.')">"Here starts a very special week our first valentine."</div>
+  <div class="quote-box" onclick="openModal('images/q6.jpg', 'That cutest First valentine date.')">"That cutest First valentine date."</div>
+  <div class="quote-box" onclick="openModal('images/q7.jpg', 'Umm her first birthday celebration & her smile.')">"Umm her first birthday celebration & her smile."</div>
+  <div class="quote-box" onclick="openModal('images/q8.jpg', 'This smile and shyness-completely melts me.')">"This smile and shyness-completely melts me."</div>
+  <div class="quote-box" onclick="openModal('images/q9.jpg', 'That first photo after 2 month.')">"That first photo after 2 month."</div>
+</div>
+
+<div style="text-align:center;">
+  <a href="index3.html" class="back-btn">← Back to Surprise Page</a>
+</div>
+
+<!-- Modal -->
+<div id="imgModal" class="modal" onclick="closeModal()">
+  <div class="modal-content">
+    <span style="position:absolute; top:20px; right:30px; font-size:30px; color:white; cursor:pointer;" onclick="closeModal()">×</span>
+    <img id="modalImg" src="" alt="Love Memory">
+    <div class="caption" id="imgCaption"></div>
+  </div>
+</div>
+
+<script>
+  function openModal(src, caption) {
+    document.getElementById("modalImg").src = src;
+    document.getElementById("imgCaption").innerText = caption;
+    document.getElementById("imgModal").classList.add("active");
+  }
+
+  function closeModal() {
+    document.getElementById("imgModal").classList.remove("active");
+  }
+
+  function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = Math.random() * 3 + 4 + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+  }
+
+  setInterval(createHeart, 300);
+</script>
+
+</body>
+</html>

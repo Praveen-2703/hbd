@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Happy Birthday, My Love! 🎂</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap');
+
+    body {
+      text-align: center;
+      background-color: #ffe6f2;
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+      position: relative;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      padding: 50px;
+      z-index: 2;
+      position: relative;
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      color: #d63384;
+      font-size: 3.5rem;
+      text-shadow: 2px 2px #ff99c8;
+    }
+
+    p {
+      color: #b71c50;
+      font-size: 1.5rem;
+      margin-top: 10px;
+    }
+
+    button {
+      background-color: #ff4081;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      margin: 10px 5px;
+      border-radius: 10px;
+      transition: background 0.3s, transform 0.2s;
+      z-index: 3;
+      position: relative;
+    }
+
+    button:hover {
+      background-color: #e6005c;
+      transform: scale(1.05);
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      animation: fadeIn 0.5s;
+      z-index: 999;
+    }
+
+    .popup img {
+      width: 100px;
+      margin-bottom: 15px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .balloons {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      animation: floatUp 4s infinite ease-in-out;
+      z-index: 1;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translate(-50%, 10px); }
+      50% { transform: translate(-50%, -10px); }
+      100% { transform: translate(-50%, 10px); }
+    }
+
+    .heart {
+      position: fixed;
+      top: -40px;
+      color: #ff1a66;
+      font-size: 28px;
+      opacity: 0.95;
+      text-shadow: 0 0 8px #ff66a3, 0 0 15px #ff1a66;
+      animation-name: fall, sway;
+      animation-timing-function: linear, ease-in-out;
+      animation-iteration-count: infinite;
+      animation-duration: 5s, 3s;
+      user-select: none;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) translateX(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) translateX(20px);
+        opacity: 0;
+      }
+    }
+
+    @keyframes sway {
+      0%, 100% {
+        transform: translateX(0);
+      }
+      50% {
+        transform: translateX(25px);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🎶 Background Music -->
+  <audio id="bgMusic" autoplay loop>
+    <source src="happy_birthday.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- 🎈 Balloons -->
+  <img src="balloons.png" class="balloons" alt="Balloons" />
+
+  <!-- 💌 Main Content -->
+  <div class="container">
+    <h1>Happy Birthday, My Love! 🎉</h1>
+    <p>You make my world brighter every day! 💖</p>
+    <button onclick="showPopup()">Click for a Surprise!</button>
+  </div>
+
+  <!-- 🎁 Surprise Popup -->
+  <div id="popup" class="popup">
+    <img src="gift-box.png" alt="Gift Box" />
+    <h2>Surprise! 🎁</h2>
+    <p>I have something special for you! 💕</p>
+    <button onclick="redirectToQuotes()">Quotes & Memories 📸</button>
+    <br />
+    <button onclick="closePopup()">Close ❌</button>
+  </div>
+
+  <!-- 💻 JS Logic -->
+  <script>
+    function showPopup() {
+      document.getElementById('popup').style.display = 'block';
+    }
+
+    function closePopup() {
+      document.getElementById('popup').style.display = 'none';
+    }
+
+    function redirectToQuotes() {
+  const audio = document.getElementById('bgMusic'); // get audio reference
+
+  // clear everything else, but keep audio
+  document.body.innerHTML = `
+    <iframe src="quotes.html" style="width:100vw;height:100vh;border:none;"></iframe>
+  `;
+  document.body.appendChild(audio); // re-append it
+
+  // then add iframe
+  const iframe = document.createElement('iframe');
+  iframe.src = 'quotes.html';
+  iframe.style.width = '100vw';
+  iframe.style.height = '100vh';
+  iframe.style.border = 'none';
+
+  document.body.appendChild(iframe);
+}
+
+
+    // Heart rain
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerHTML = '❤️';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.fontSize = (20 + Math.random() * 30) + 'px';
+      heart.style.animationDuration =
+        (5 + Math.random() * 4) + 's, ' + (3 + Math.random() * 3) + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 9000);
+    }
+
+    setInterval(createHeart, 300);
+
+    // Music autoplay with user interaction fallback
+    document.addEventListener('click', () => {
+      const audio = document.getElementById('bgMusic');
+      if (audio.paused) {
+        audio.play().catch(() => {
+          console.log('Autoplay failed, user interaction required.');
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>
